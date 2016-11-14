@@ -55,7 +55,11 @@ class BucketedTextChangeListener implements TextWatcher {
         final String enteredContent = contents.substring(0, enteredContentLength);
 
         editText.removeTextChangedListener(this);
-        editText.setText(enteredContent + postFixes[expectedContentLength - enteredContentLength]);
+        if(expectedContentLength < enteredContentLength) {
+            editText.setText(enteredContent);        
+        } else {
+            editText.setText(enteredContent + postFixes[expectedContentLength - enteredContentLength]);
+        }
         editText.setSelection(enteredContentLength);
         editText.addTextChangedListener(this);
 
